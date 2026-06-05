@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AppTest {
     
     @Test
-    public void testGetGreeting() {
+    public void testHomeEndpoint() {
         App app = new App();
-        assertEquals("Hello World!", app.getGreeting(), "The greeting message should match.");
+        String result = app.home();
+        assert(result.contains("Welcome to my AWS EC2 Cloud Server!"));
     }
 }

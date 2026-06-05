@@ -52,3 +52,17 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}       # The contents of your AWS .pem private key file
         source: "*.jar"
         target: "/home/${{ secrets.EC2_USERNAME }}/app" # The directory on EC2 where the file will land
+
+    - name: Start Application on EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          # Stop previous instance of the app if running on port 8080
+          sudo fuser -k 8080/tcp || true
+          
+          # Run the new web app in the background and log output
+          cd /home/${{ secrets.EC2_USERNAME }}/app
+          nohup java -jar my-maven-app-1.0-SNAPSHOT.jar > app.log 2>&1 &
