@@ -1,7 +1,7 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
     
@@ -9,6 +9,6 @@ public class AppTest {
     public void testHomeEndpoint() {
         App app = new App();
         String result = app.home();
-        assert(result.contains("Welcome to my AWS EC2 Cloud Server!"));
+        assertTrue(result.contains("Welcome to my AWS EC2 Cloud Server!"));
     }
 }
